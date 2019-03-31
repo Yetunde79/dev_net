@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
   user: {
-    type: Schema.type.ObjectId, //Associate user by it's id
+    type: Schema.Types.ObjectId, //Associate user by it's id
     ref: "users"
   },
   handle: {
@@ -35,7 +35,7 @@ const ProfileSchema = new Schema({
     type: String
   },
   experience: [
-    //array of object
+    //array of object, there can be multiple experiences
     {
       title: {
         type: String,
@@ -66,6 +66,7 @@ const ProfileSchema = new Schema({
     }
   ],
   education: [
+    //there can be multiple education exp
     {
       school: {
         type: String,
@@ -118,4 +119,4 @@ const ProfileSchema = new Schema({
   }
 });
 
-module.exports = User = mongoose.model("profile", ProfileSchema);
+module.exports = Profile = mongoose.model("profile", ProfileSchema);

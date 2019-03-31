@@ -10,9 +10,9 @@ const User = require("../../models/User");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
-router.get("/test", (res, req) => res.json({ msg: "User Works" }));
+router.get("/test", (req, res) => res.json({ msg: "User Works" }));
 
-router.post("/register", (res, req) => {
+router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
   //check Validation
