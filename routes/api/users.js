@@ -3,6 +3,8 @@ const router = express.Router();
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
+
 const keys = require("../../config/keys");
 
 const User = require("../../models/User");
@@ -76,7 +78,11 @@ router.post("/login", (req, res) => {
       .compare(password, user.password) //check if password is the same
       .then(isMatch => {
         if (isMatch) {
-          const payload = { id: user.id, name: user.name, avatar: user.avatar };
+          const payload = {
+            id: user._id,
+            name: user.name,
+            avatar: user.avatar
+          };
           jwt.sign(
             payload,
             keys.secret,
@@ -95,5 +101,17 @@ router.post("/login", (req, res) => {
       });
   });
 });
+
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json({
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email
+    });
+  }
+);
 
 module.exports = router;

@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// Create Schema
 const ProfileSchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId, //Associate user by it's id
+    type: Schema.Types.ObjectId,
     ref: "users"
   },
   handle: {
@@ -25,7 +26,7 @@ const ProfileSchema = new Schema({
     required: true
   },
   skills: {
-    type: [String], //Array of string,
+    type: [String],
     required: true
   },
   bio: {
@@ -35,7 +36,6 @@ const ProfileSchema = new Schema({
     type: String
   },
   experience: [
-    //array of object, there can be multiple experiences
     {
       title: {
         type: String,
@@ -46,8 +46,7 @@ const ProfileSchema = new Schema({
         required: true
       },
       location: {
-        type: String,
-        required: true
+        type: String
       },
       from: {
         type: Date,
@@ -66,7 +65,6 @@ const ProfileSchema = new Schema({
     }
   ],
   education: [
-    //there can be multiple education exp
     {
       school: {
         type: String,
@@ -76,7 +74,7 @@ const ProfileSchema = new Schema({
         type: String,
         required: true
       },
-      fieldOfStudy: {
+      fieldofstudy: {
         type: String,
         required: true
       },
