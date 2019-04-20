@@ -27,7 +27,7 @@ class Register extends Component {
   };
 
   onSubmit = e => {
-    const { name, email, password, password2, errors } = this.state;
+    const { name, email, password, password2 } = this.state;
 
     e.preventDefault();
 

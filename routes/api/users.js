@@ -49,7 +49,7 @@ router.post("/register", (req, res) => {
           newUser
             .save() //saves password with hash to the database
             .then(user => res.json(user)) //responds to server with user info if no error
-            .catch(err => console.log(err));
+            .catch(err => res.json(err));
         });
       });
     }

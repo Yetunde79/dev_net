@@ -8,11 +8,11 @@ module.exports = function validateLoginInput(data) {
   data.password = !isEmpty(data.password) ? data.password : " ";
 
   if (!Validator.isEmail(data.email)) {
-    errors.name = "Email is invalid";
+    errors.email = "Email is invalid";
   }
 
   if (Validator.isEmpty(data.email)) {
-    errors.name = "Email is required";
+    errors.email = "Email is required";
   }
 
   if (Validator.isEmpty(data.password)) {
