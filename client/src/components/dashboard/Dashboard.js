@@ -38,6 +38,7 @@ class Dashboard extends Component {
         );
       }
     }
+
     return (
       <div class="dashboard">
         <div class="container">
