@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
+import { createProfile } from "../../actions/profileActions";
 
 class CreateProfile extends Component {
   state = {
@@ -31,7 +33,31 @@ class CreateProfile extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+
+    const profileData = {
+      handle: this.state.handle,
+      company: this.state.company,
+      website: this.state.website,
+      location: this.state.location,
+      status: this.state.status,
+      skills: this.state.skills,
+      githubusername: this.state.githubusername,
+      bio: this.state.bio,
+      twitter: this.state.twitter,
+      facebook: this.state.facebook,
+      linkedin: this.state.linkedin,
+      youtube: this.state.youtube,
+      instagram: this.state.instagram
+    };
+
+    this.props.createProfile(profileData, this.props.history);
   };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.errors) {
+      return { errors: props.errors };
+    }
+  }
   render() {
     const { errors, displaySocialInputs } = this.state;
 
@@ -47,20 +73,20 @@ class CreateProfile extends Component {
       { label: "Other", value: "Other" }
     ];
     return (
-      <div class="create-profile">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 m-auto">
-              <a href="dashboard.html" class="btn btn-light">
+      <div className="create-profile">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 m-auto">
+              <a href="dashboard.html" className="btn btn-light">
                 Go Back
               </a>
-              <h1 class="display-4 text-center">Create Your Profile</h1>
-              <p class="lead text-center">
+              <h1 className="display-4 text-center">Create Your Profile</h1>
+              <p className="lead text-center">
                 Let's get some information to make your profile stand out
               </p>
-              <small class="d-block pb-3">* = required field</small>
+              <small className="d-block pb-3">* = required field</small>
               <form onSubmit={this.onSubmit}>
-                <div class="form-group">
+                <div className="form-group">
                   <TextFieldGroup
                     placeholder="* Profile handle"
                     name="handle"
@@ -138,6 +164,7 @@ class CreateProfile extends Component {
 
                   <div className="mb-3">
                     <button
+                      type="button"
                       onClick={() => {
                         this.setState({
                           displaySocialInputs: !this.state.displaySocialInputs
@@ -224,4 +251,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(withRouter(CreateProfile));
