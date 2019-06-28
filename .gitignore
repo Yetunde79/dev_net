@@ -3,3 +3,7 @@
 package-lock.json
 
 /devconnector_theme
+
+.vscode
+
+.DS_STORE

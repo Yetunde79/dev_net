@@ -3,13 +3,18 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getCurrentProfile } from "../../actions/profileActions";
+import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
+import ProfileActions from "./ProfileActions";
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
+
+  onDeleteClick = e => {
+    this.props.deleteAccount();
+  };
 
   render() {
     const { user, auth } = this.props.auth;
@@ -22,12 +27,25 @@ class Dashboard extends Component {
     } else {
       //check if user has profile data
       if (Object.keys(profile).length > 0) {
-        dashboardContent = <h4>Profile Display</h4>;
+        dashboardContent = (
+          <div>
+            <p class="lead text-muted">
+              Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
+            </p>
+            <ProfileActions />
+            {/*TODO: EXP AND EDU */}
+            <div style={{ marginBottom: "60px" }}>
+              <button className="btn btn-danger" onClick={this.onDeleteClick}>
+                Delete My Account
+              </button>
+            </div>
+          </div>
+        );
       } else {
         //user is logged in and has no profile
         dashboardContent = (
           <div>
-            <p className="lead texr-muted">Welcome {user.name}</p>
+            <p className="lead text-muted">Welcome {user.name}</p>
             <p>
               You have not yet set up a profile, please add some information
             </p>
@@ -46,20 +64,6 @@ class Dashboard extends Component {
             <div class="col-md-12">
               <h1 class="display-4">Dashboard</h1>
               {dashboardContent}
-              <p class="lead text-muted">Welcome John Doe</p>
-              <div class="btn-group mb-4" role="group">
-                <a href="edit-profile.html" class="btn btn-light">
-                  <i class="fas fa-user-circle text-info mr-1" /> Edit Profile
-                </a>
-                <a href="add-experience.html" class="btn btn-light">
-                  <i class="fab fa-black-tie text-info mr-1" />
-                  Add Experience
-                </a>
-                <a href="add-education.html" class="btn btn-light">
-                  <i class="fas fa-graduation-cap text-info mr-1" />
-                  Add Education
-                </a>
-              </div>
 
               <div>
                 <h4 class="mb-2">Experience Credentials</h4>
@@ -82,7 +86,7 @@ class Dashboard extends Component {
                       </td>
                     </tr>
                     <tr>
-                      <td>Traversy Media</td>
+                      <td>Yetunde Media</td>
                       <td>Instructor & Developer</td>
                       <td>02-03-2015 - Now</td>
                       <td>
@@ -135,11 +139,12 @@ const mapStateToProps = state => ({
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
+  { getCurrentProfile, deleteAccount }
 )(Dashboard);
