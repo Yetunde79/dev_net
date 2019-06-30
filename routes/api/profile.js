@@ -81,15 +81,15 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateProfileInput(req.body);
-
-    //check validation
+    // Check Validation
     if (!isValid) {
-      //return any errors with 400 status
-      res.status(400).json(errors);
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
     }
+
+    // Get fields
     const profileFields = {};
     profileFields.user = req.user.id;
-
     if (req.body.handle) profileFields.handle = req.body.handle;
     if (req.body.company) profileFields.company = req.body.company;
     if (req.body.website) profileFields.website = req.body.website;
@@ -98,12 +98,11 @@ router.post(
     if (req.body.bio) profileFields.bio = req.body.bio;
     if (req.body.githubusername)
       profileFields.githubusername = req.body.githubusername;
-
-    //Skills
-    if (typeof req.body.skills !== "")
+    // Skills - Spilt into array
+    if (typeof req.body.skills !== "undefined") {
       profileFields.skills = req.body.skills.split(",");
-
-    //Social
+    }
+    // Social (optional fields)
     profileFields.social = {};
     if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
     if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
@@ -111,22 +110,35 @@ router.post(
     if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
 
+    // Create or Edit current user profile with unique handle
     Profile.findOne({ user: req.user.id }).then(profile => {
-      if (profile) {
-        //Update profile
-        Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
-      } else {
+      // If profile not exist, then create a new one, Otherwise just update
+
+      // Create new profile
+      if (!profile) {
+        // Check if handle exists (handle should be unoque for all profile)
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
-            errors.handle = "That handle already exists";
+            errors.handle = "handle already exists";
             res.status(400).json(errors);
           }
         });
         new Profile(profileFields).save().then(profile => res.json(profile));
+      }
+      // Update the profile
+      else {
+        // Check if handle exists for other user
+        Profile.findOne({ handle: profileFields.handle }).then(p => {
+          if (profile.handle !== p.handle) {
+            errors.handle = "handle already exists";
+            res.status(400).json(errors);
+          }
+        });
+        Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileFields },
+          { new: true }
+        ).then(profile => res.json(profile));
       }
     });
   }

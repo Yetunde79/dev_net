@@ -29,7 +29,7 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
-            <p class="lead text-muted">
+            <p className="lead text-muted">
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
             <ProfileActions />
@@ -58,16 +58,16 @@ class Dashboard extends Component {
     }
 
     return (
-      <div class="dashboard">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <h1 class="display-4">Dashboard</h1>
+      <div className="dashboard">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <h1 className="display-4">Dashboard</h1>
               {dashboardContent}
 
               <div>
-                <h4 class="mb-2">Experience Credentials</h4>
-                <table class="table">
+                <h4 className="mb-2">Experience Credentials</h4>
+                <table className="table">
                   <thead>
                     <tr>
                       <th>Company</th>
@@ -82,7 +82,7 @@ class Dashboard extends Component {
                       <td>Senior Developer</td>
                       <td>02-03-2009 - 01-02-2014</td>
                       <td>
-                        <button class="btn btn-danger">Delete</button>
+                        <button className="btn btn-danger">Delete</button>
                       </td>
                     </tr>
                     <tr>
@@ -90,7 +90,7 @@ class Dashboard extends Component {
                       <td>Instructor & Developer</td>
                       <td>02-03-2015 - Now</td>
                       <td>
-                        <button class="btn btn-danger">Delete</button>
+                        <button className="btn btn-danger">Delete</button>
                       </td>
                     </tr>
                   </tbody>
@@ -98,8 +98,8 @@ class Dashboard extends Component {
               </div>
 
               <div>
-                <h4 class="mb-2">Education Credentials</h4>
-                <table class="table">
+                <h4 className="mb-2">Education Credentials</h4>
+                <table className="table">
                   <thead>
                     <tr>
                       <th>School</th>
@@ -114,7 +114,7 @@ class Dashboard extends Component {
                       <td>Associates</td>
                       <td>02-03-2007 - 01-02-2009</td>
                       <td>
-                        <button class="btn btn-danger">Delete</button>
+                        <button className="btn btn-danger">Delete</button>
                       </td>
                     </tr>
                   </tbody>
@@ -122,7 +122,7 @@ class Dashboard extends Component {
               </div>
 
               <div>
-                <button class="btn btn-danger">Delete My Account</button>
+                <button className="btn btn-danger">Delete My Account</button>
               </div>
             </div>
           </div>
