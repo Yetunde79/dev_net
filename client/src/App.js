@@ -15,8 +15,8 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/common/PrivateRoute";
-import CreateProfile from "./components/create-profile/CreateProfile";
-import EditProfile from "./components/edit-profile/EditProfile";
+import CreateProfile from "./components/profile-forms/CreateProfile";
+import EditProfile from "./components/profile-forms/EditProfile";
 import AddExperience from "./components/add-credentials/AddExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
 
