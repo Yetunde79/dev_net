@@ -29,10 +29,10 @@ const TextAreaFieldGroup = ({
 
 TextAreaFieldGroup.propTypes = {
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
+  info: PropTypes.string,
   error: PropTypes.string,
-  info: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };
 

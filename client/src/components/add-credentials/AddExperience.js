@@ -144,10 +144,8 @@ class AddExperience extends Component {
                     value={this.state.description}
                     onChange={this.onChange}
                     error={errors.description}
+                    info="Some of your responsibilities, etc"
                   />
-                  <small className="form-text text-muted">
-                    Some of your responsibilities, etc
-                  </small>
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
@@ -158,6 +156,7 @@ class AddExperience extends Component {
     );
   }
 }
+
 AddExperience.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
