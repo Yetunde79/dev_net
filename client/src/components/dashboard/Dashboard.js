@@ -120,10 +120,6 @@ class Dashboard extends Component {
                   </tbody>
                 </table>
               </div>
-
-              <div>
-                <button className="btn btn-danger">Delete My Account</button>
-              </div>
             </div>
           </div>
         </div>
