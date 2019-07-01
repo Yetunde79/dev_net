@@ -2,43 +2,30 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
+import { addEducation } from "../../actions/profileActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addEducation } from "../../actions/profileActions";
 
 class AddEducation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      school: "",
-      degree: "",
-      fieldofstudy: "",
-      from: "",
-      to: "",
-      current: false,
-      description: "",
-      errors: {},
-      disabled: false
-    };
+  state = {
+    school: "",
+    degree: "",
+    fieldOfStudy: "",
+    from: "",
+    to: "",
+    current: false,
+    description: "",
+    errors: {},
+    disabled: false
+  };
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onCheck = this.onCheck.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
-  }
-
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
 
     const eduData = {
       school: this.state.school,
       degree: this.state.degree,
-      fieldofstudy: this.state.fieldofstudy,
+      fieldOfStudy: this.state.fieldOfStudy,
       from: this.state.from,
       to: this.state.to,
       current: this.state.current,
@@ -46,18 +33,24 @@ class AddEducation extends Component {
     };
 
     this.props.addEducation(eduData, this.props.history);
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
 
-  onChange(e) {
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  onCheck(e) {
+  onCheck = e => {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
     });
-  }
+  };
 
   render() {
     const { errors } = this.state;
@@ -92,10 +85,10 @@ class AddEducation extends Component {
                 />
                 <TextFieldGroup
                   placeholder="* Field of Study"
-                  name="fieldofstudy"
-                  value={this.state.fieldofstudy}
+                  name="fieldOfStudy"
+                  value={this.state.fieldOfStudy}
                   onChange={this.onChange}
-                  error={errors.fieldofstudy}
+                  error={errors.fieldOfStudy}
                 />
                 <h6>From Date</h6>
                 <TextFieldGroup

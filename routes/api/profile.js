@@ -116,7 +116,7 @@ router.post(
 
       // Create new profile
       if (!profile) {
-        // Check if handle exists (handle should be unoque for all profile)
+        // Check if handle exists (handle should be unique for all profile)
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = "handle already exists";
@@ -190,7 +190,7 @@ router.post(
       const newEdu = {
         school: req.body.school,
         degree: req.body.degree,
-        fieldofstudy: req.body.fieldofstudy,
+        fieldOfStudy: req.body.fieldOfStudy,
         from: req.body.from,
         to: req.body.to,
         current: req.body.current,
