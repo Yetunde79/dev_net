@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import isEmpty from "../../validation/is-empty";
 import { Link } from "react-router-dom";
+import isEmpty from "../../validation/is-empty";
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
-
     return (
       <div className="row">
         <div className="col-md-12">
@@ -26,7 +25,7 @@ class ProfileHeader extends Component {
                   <span>at {profile.company}</span>
                 )}
               </p>
-              {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
+              {isEmpty(profile.company) ? null : <p>{profile.company}</p>}
               <p>
                 {isEmpty(profile.website) ? null : (
                   <Link

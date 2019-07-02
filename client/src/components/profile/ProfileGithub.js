@@ -12,7 +12,7 @@ class ProfileGithub extends Component {
           <div className="row">
             <div className="col-md-6">
               <h4>
-                <Link className="text-info" target="_blank">
+                <Link to={"/"} className="text-info" target="_blank">
                   {" "}
                   Repository One
                 </Link>
