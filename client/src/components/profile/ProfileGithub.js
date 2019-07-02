@@ -8,11 +8,11 @@ class ProfileGithub extends Component {
       <div ref="myRef">
         <hr />
         <h3 className="mb-4">Latest Github Repos</h3>
-        <div key={repo.id} className="card card-body mb-2">
+        <div className="card card-body mb-2">
           <div className="row">
             <div className="col-md-6">
               <h4>
-                <Link to={repo.html_url} className="text-info" target="_blank">
+                <Link className="text-info" target="_blank">
                   {" "}
                   Repository One
                 </Link>

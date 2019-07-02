@@ -8,6 +8,7 @@ import ProfileGithub from "./ProfileGithub";
 import ProfileCreds from "./ProfileCreds";
 import Spinner from "../common/Spinner";
 import { getProfileByHandle } from "../../actions/profileActions";
+import ProfileItem from "../profiles/ProfileItem";
 
 class Profile extends Component {
   componentDidMount() {
@@ -17,28 +18,39 @@ class Profile extends Component {
   }
 
   render() {
+    const { profile, loading } = this.props.profile;
+    let profileContent;
+
+    if (profile === null || loading) {
+      profileContent = <Spinner />;
+    } else {
+      profileContent = (
+        <div>
+          <div className="row">
+            <div className="col-6">
+              <Link to="/profiles" className="btn btn-light mb-3 float-left">
+                Back To Profiles
+              </Link>
+            </div>
+            <div className="col-6">
+              <p>Hi</p>
+            </div>
+          </div>
+          <ProfileHeader profile={profile} />
+          <ProfileAbout />
+          <ProfileCreds />
+          <ProfileGithub />
+        </div>
+      );
+    }
+
     return (
       <div className="profile">
-        <ProfileHeader />
-        <ProfileAbout />
-        <ProfileCreds />
-        <ProfileGithub />
+        {profileContent}
         {/* <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className="row">
-                <div className="col-6">
-                  <a
-                    href="profiles.html"
-                    className="btn btn-light mb-3 float-left"
-                  >
-                    Back To Profiles
-                  </a>
-                </div>
-                <div className="col-6">
-                  <p>Hi</p>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div> */}
