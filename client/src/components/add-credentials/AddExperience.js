@@ -19,6 +19,12 @@ class AddExperience extends Component {
     disabled: false
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onSubmit = e => {
     e.preventDefault();
 
@@ -34,12 +40,6 @@ class AddExperience extends Component {
 
     this.props.addExperience(expData, this.props.history);
   };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
-  }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });

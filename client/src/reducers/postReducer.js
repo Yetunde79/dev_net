@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  post: [],
+  posts: [],
   post: {},
   loading: false
 };
@@ -34,13 +34,13 @@ export default function(state = initialState, action) {
     case ADD_POST:
       return {
         ...state,
-        post: null
+        posts: [action.payload, ...state.posts]
       };
-    case DELETE_POST:
-      return {
-        ...state,
-        post: null
-      };
+    // case DELETE_POST:
+    //   return {
+    //     ...state,
+    //     post: null
+    //   };
     default:
       return state;
   }

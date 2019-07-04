@@ -28,10 +28,6 @@ class EditProfile extends Component {
     errors: {}
   };
 
-  componentDidMount() {
-    this.props.getCurrentProfile();
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -85,6 +81,10 @@ class EditProfile extends Component {
         instagram: profile.instagram
       });
     }
+  }
+
+  componentDidMount() {
+    this.props.getCurrentProfile();
   }
 
   onSubmit = e => {
