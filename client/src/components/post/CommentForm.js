@@ -24,7 +24,7 @@ class CommentForm extends Component {
     e.preventDefault();
 
     const { user } = this.props.auth;
-    const {postId} = this.props;
+    const { postId } = this.props;
 
     const newComment = {
       text: this.state.text,
@@ -41,7 +41,9 @@ class CommentForm extends Component {
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
-          <div className="card-header bg-info text-white">Make a comment...</div>
+          <div className="card-header bg-info text-white">
+            Make a comment...
+          </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
@@ -63,6 +65,8 @@ class CommentForm extends Component {
     );
   }
 }
+
+/*TODO: add google captcha*/
 
 CommentForm.propTypes = {
   auth: PropTypes.object.isRequired,

@@ -106,4 +106,5 @@ class App extends Component {
   }
 }
 
+/*TODO: Redo website design*/
 export default App;
