@@ -8,7 +8,6 @@ import ProfileGithub from "./ProfileGithub";
 import ProfileCreds from "./ProfileCreds";
 import Spinner from "../common/Spinner";
 import { getProfileByHandle } from "../../actions/profileActions";
-import ProfileItem from "../profiles/ProfileItem";
 
 class Profile extends Component {
   componentDidMount() {
