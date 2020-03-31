@@ -122,7 +122,7 @@ class CreateProfile extends Component {
                     value={this.state.website}
                     onChange={this.onChange}
                     error={errors.website}
-                    info="Could be your own or a company website"
+                    info="Could be your own or a company website. Use http(s) in your url"
                   />
 
                   <TextFieldGroup
@@ -252,7 +252,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { createProfile }
-)(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile })(
+  withRouter(CreateProfile)
+);

@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
+const request = require("request");
+const axios = require("axios");
+
+const config = require("config");
 
 //Load validation
 const validateProfileInput = require("../../validation/profile");
@@ -34,18 +38,19 @@ router.get(
 
 router.get("/handle/:handle", (req, res) => {
   const errors = {};
-  Profile.findOne({ handle: req.params.handle }) //handle is from the route
-    .populate("user", ["name", "avatar"]) //populates with name abd avatar from user model
+
+  Profile.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
     .then(profile => {
       if (!profile) {
         errors.noprofile = "There is no profile for this user";
-        return res.status(404).json(errors);
+        res.status(404).json(errors);
       }
+
       res.json(profile);
     })
     .catch(err => res.status(404).json(err));
 });
-
 router.get("/user/:user_id", (req, res) => {
   const errors = {};
   Profile.findOne({ user: req.params.user_id })
@@ -258,5 +263,31 @@ router.delete(
     });
   }
 );
+
+router.get("/github/:username", async (req, res) => {
+  try {
+    const options = {
+      uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`,
+      method: "GET",
+      headers: {
+        "user-agent": "node.js",
+        Authorization: `token ${config.get("githubToken")}`
+      }
+    };
+
+    request(options, (error, response, body) => {
+      if (error) console.error(error);
+
+      if (response.statusCode !== 200) {
+        return res.status(404).json({ msg: "No Github Profile" });
+      }
+
+      res.json(JSON.parse(body));
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;

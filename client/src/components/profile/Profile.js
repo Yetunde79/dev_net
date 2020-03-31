@@ -18,7 +18,7 @@ class Profile extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile === null && this.props.profile.loading) {
-      this.props.history.push("not-found");
+      this.props.history.push("/not-found");
     }
   }
 
@@ -37,9 +37,7 @@ class Profile extends Component {
                 Back To Profiles
               </Link>
             </div>
-            <div className="col-6">
-              <p>Hi</p>
-            </div>
+            <div className="col-6" />
           </div>
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
@@ -54,18 +52,7 @@ class Profile extends Component {
       );
     }
 
-    return (
-      <div className="profile">
-        {profileContent}
-        {/* <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              
-            </div>
-          </div>
-        </div> */}
-      </div>
-    );
+    return <div className="profile">{profileContent}</div>;
   }
 }
 

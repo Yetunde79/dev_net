@@ -56,9 +56,7 @@ class Register extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">
-                Create your DevConnector account
-              </p>
+              <p className="lead text-center">Create your DevNet account</p>
 
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -117,7 +115,4 @@ const mapStatetoProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStatetoProps,
-  { registerUser }
-)(withRouter(Register));
+export default connect(mapStatetoProps, { registerUser })(withRouter(Register));

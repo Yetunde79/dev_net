@@ -1,10 +1,16 @@
+html,
+body {
+  height: 100%;
+}
+
 img {
   width: 100%;
 }
 
 .landing {
   position: relative;
-  background: url("../src/img/showcase.jpg") no-repeat;
+  background: url("../src/img/nesa-by-makers-kwzWjTnDPLk-unsplash.jpg")
+    no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -29,9 +35,29 @@ img {
   opacity: 0.9;
 }
 
+.profile-github {
+  padding-top: 50px;
+}
+
 .latest-profiles-img {
   width: 40px;
   height: 40px;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #bbb !important;
+}
+
+.form-control::-moz-placeholder {
+  color: #bbb !important;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #bbb !important;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #bbb !important;
 }
 
 .form-control::placeholder {

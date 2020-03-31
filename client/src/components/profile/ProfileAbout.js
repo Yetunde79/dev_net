@@ -5,7 +5,9 @@ import isEmpty from "../../validation/is-empty";
 class ProfileAbout extends Component {
   render() {
     const { profile } = this.props;
-    const firstName = profile.user.name.trim().split(" ")[0];
+    // console.log(firstName.trim().split(" ")[0]);
+
+    const name = profile.user.name;
 
     //skills list
     const skills = profile.skills.map((skill, index) => (
@@ -20,7 +22,7 @@ class ProfileAbout extends Component {
           <div className="card card-body bg-light mb-3">
             {isEmpty(profile.bio) ? null : (
               <React.Fragment>
-                <h3 className="text-center text-info">{firstName}'s Bio</h3>
+                <h3 className="text-center text-info">{name}'s Bio</h3>
                 <p className="lead">{profile.bio}</p>
                 <hr />
               </React.Fragment>

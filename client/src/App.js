@@ -8,7 +8,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
 
 import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
@@ -54,7 +53,7 @@ class App extends Component {
           <div className="App">
             <Navbar />
             <Route exact path="/" component={Landing} />
-            <div className="container">
+            <div className="container clear-top" id="main">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
@@ -98,7 +97,6 @@ class App extends Component {
               </Switch>
               <Route exact path="/not-found" component={NotFound} />
             </div>
-            <Footer />
           </div>
         </Router>
       </Provider>
