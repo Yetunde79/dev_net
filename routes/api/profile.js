@@ -275,7 +275,7 @@ router.get("/github/:username", async (req, res) => {
       }
     };
 
-    request(options, (error, response, body) => {
+    await request(options, (error, response, body) => {
       if (error) console.error(error);
 
       if (response.statusCode !== 200) {
