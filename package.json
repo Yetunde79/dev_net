@@ -21,6 +21,7 @@
     "concurrently": "^4.1.0",
     "config": "^3.3.1",
     "dotenv": "^8.0.0",
+    "eslint-plugin-react": "^7.19.0",
     "express": "^4.16.4",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.0",
