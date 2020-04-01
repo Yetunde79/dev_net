@@ -275,6 +275,8 @@ router.get("/github/:username", async (req, res) => {
       }
     };
 
+    console.log(config.get("githubToken"));
+
     await request(options, (error, response, body) => {
       if (error) console.error(error);
 
