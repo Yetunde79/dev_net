@@ -291,15 +291,4 @@ router.get("/github/:username", async (req, res) => {
   }
 });
 
-// router.get("/github/:username", async (req, res) => {
-//   const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
-//   const clientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
-
-//   const githubResponse = await axios.get(
-//     `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${clientId}&client_secret=${clientSecret}`
-//   );
-
-//   return res.json(githubResponse.data);
-// });
-
 module.exports = router;
