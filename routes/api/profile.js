@@ -5,7 +5,8 @@ const passport = require("passport");
 const request = require("request");
 const axios = require("axios");
 
-const config = require("config");
+// const config = require("config");
+require("dotenv").config();
 
 //Load validation
 const validateProfileInput = require("../../validation/profile");
@@ -265,14 +266,40 @@ router.delete(
 );
 
 router.get("/github/:username", async (req, res) => {
-  const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
-  const clientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+  try {
+    const options = {
+      uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`,
+      method: "GET",
+      headers: {
+        "user-agent": "node.js",
+        Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
+      }
+    };
 
-  const githubResponse = await axios.get(
-    `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${clientId}&client_secret=${clientSecret}`
-  );
+    request(options, (error, response, body) => {
+      if (error) console.error(error);
 
-  return res.json(githubResponse.data);
+      if (response.statusCode !== 200) {
+        return res.status(404).json({ msg: "No Github Profile" });
+      }
+
+      res.json(JSON.parse(body));
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
+
+// router.get("/github/:username", async (req, res) => {
+//   const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+//   const clientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+
+//   const githubResponse = await axios.get(
+//     `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${clientId}&client_secret=${clientSecret}`
+//   );
+
+//   return res.json(githubResponse.data);
+// });
 
 module.exports = router;
